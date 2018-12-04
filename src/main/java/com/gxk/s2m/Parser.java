@@ -108,7 +108,7 @@ public class Parser {
 
   public List<String> tokenizer(String val) {
     List<String> tokens = new ArrayList<>();
-    Pattern pattern = Pattern.compile("([*;])|(select | from | where | order by | desc | asc | != | = )|\\'\\S*\\'|(\\w)+");
+    Pattern pattern = Pattern.compile("([*;])|(select | from | where | order by | desc | asc | != | = | > | >= | < | <= )|\\'\\S*\\'|(\\w)+");
     Matcher matcher = pattern.matcher(val);
 
     while (matcher.find()) {

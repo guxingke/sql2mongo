@@ -27,6 +27,14 @@ public class WhereNode extends Node{
           return eval("$eq", body.get(0).eval().toString(), body.get(2).eval());
         case "!=":
           return eval("$ne", body.get(0).eval().toString(), body.get(2).eval());
+        case ">":
+          return eval("$gt", body.get(0).eval().toString(), body.get(2).eval());
+        case ">=":
+          return eval("$gte", body.get(0).eval().toString(), body.get(2).eval());
+        case "<":
+          return eval("$lt", body.get(0).eval().toString(), body.get(2).eval());
+        case "<=":
+          return eval("$lte", body.get(0).eval().toString(), body.get(2).eval());
       }
     }
 
@@ -53,6 +61,6 @@ public class WhereNode extends Node{
       newVal = String.format("ObjectId(\"%s\")", val);
     }
 
-    return String.format("({\"%s\": {%s: %s}})", key, op, newVal);
+    return String.format("({\"%s\": {\"%s\": %s}})", key, op, newVal);
   }
 }
