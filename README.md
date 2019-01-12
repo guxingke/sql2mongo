@@ -56,8 +56,8 @@ __mq: db.recUser.find({"_id": {$eq: NumberLong(93)}}).limit(1)
 
 ---
 
-![1543560933.png](http://images.guxingke.com/1543560933.png)
-![1543560956.png](http://images.guxingke.com/1543560956.png)
+![1543560933.png](http://raw.githubusercontent.com/guxingke/oss/master/blog/1543560933.png)
+![1543560956.png](http://raw.githubusercontent.com/guxingke/oss/master/blog/1543560956.png)
 
 
 # Note
