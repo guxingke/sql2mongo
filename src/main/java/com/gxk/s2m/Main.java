@@ -1,28 +1,24 @@
 package com.gxk.s2m;
 
-import com.gxk.s2m.node.Node;
-
-import java.util.List;
+import java.util.Arrays;
 import java.util.stream.Collectors;
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.ParserRuleContext;
+import com.gxk.s2m.select.SelectLexer;
+import com.gxk.s2m.select.SelectParser;
 
-public class Main{
+public class Main {
 
-  public static void main(String[] args){
-    if (args.length < 1) {
-      System.out.println("need sql");
-      System.exit(-1);
-    }
-
-    System.out.print(new Main().eval(args[0]));
-  }
-
-  public String eval(String sql) {
-    Parser parser = new Parser();
-    List<Node> nodes = parser.parse(sql);
-
-    return nodes.stream()
-      .map(it -> it.eval())
-      .map(String::valueOf)
-      .collect(Collectors.joining());
+  public static void main(String[] args) {
+    String exp = Arrays.stream(args).collect(Collectors.joining(" "));
+    CharStream input = new ANTLRInputStream(exp + "\n");
+    SelectLexer lexer = new SelectLexer(input);
+    CommonTokenStream stream = new CommonTokenStream(lexer);
+    SelectParser parser = new SelectParser(stream);
+    ParserRuleContext ctx = parser.stat();
+    String code = new EvalVisitor().visit(ctx);
+    System.out.println(code);
   }
 }
