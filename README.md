@@ -25,6 +25,7 @@ mvn clean package
 
 # Install
 ```bash
+wget 'https://github.com/guxingke/sql2mongo/raw/master/s2m'
 mv s2m ~/.local/bin
 ```
 
