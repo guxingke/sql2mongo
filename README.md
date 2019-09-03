@@ -25,16 +25,24 @@ mvn clean package
 
 # Install
 ```bash
-wget 'https://github.com/guxingke/sql2mongo/raw/master/s2m'
-mv s2m ~/.local/bin
+brew tap guxingke/repo && brew install s2m
 ```
 
 # Showcase
 ## My Case
 
+
+```bash
+# base 
+$ s2m "select * from user where id >= 1 and id = 100002"
+#->
+db.user.find({$and: [{id: {$gte: 1}},{id: {$eq: 100002}}]},{}).sort({_id:-1}).skip(0).limit(100)
+
+```
+
 ```bash
 # shortcut.
-which mp
+$ which mp
 # =>
 mp () {
   mq=`s2m "$*"`
@@ -43,18 +51,18 @@ mp () {
 }
 
 # base query
-mp "select _id,nickname from user where _id in (100002,100003) order by _id desc limit 10"
+$ mp "select _id,nickname from user where _id in (100002,100003) order by _id desc limit 10"
 # =>
 { "_id" : NumberLong(100003), "nickname" : "就是辣么帅2323" }
 { "_id" : NumberLong(100002), "nickname" : "下江" }
 
 # special limit
-mp "select _id,nickname from user where _id in (100002,100003) order by _id desc limit 1,1"
+$ mp "select _id,nickname from user where _id in (100002,100003) order by _id desc limit 1,1"
 # =>
 { "_id" : NumberLong(100002), "nickname" : "下江" }
 
 # collaboration with other unix tool
-mp "select _id,nickname from user where _id in (100002,100003) order by _id desc limit 10" | b2j | jq .nickname
+$ mp "select _id,nickname from user where _id in (100002,100003) order by _id desc limit 10" | b2j | jq .nickname
 # =>
 "就是辣么帅2323"
 "下江"
@@ -69,6 +77,8 @@ mp "select _id,nickname from user where _id in (100002,100003) order by _id desc
 - support base binary op.
 =,!=,> ...
 in, not in.
+
+- and, or, ().
 
 - build the binary executable file
 
