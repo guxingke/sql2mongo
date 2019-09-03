@@ -25,7 +25,7 @@ mvn clean package
 
 # Install
 ```bash
-brew tap guxingke/repo && brew install s2m
+brew tap guxingke/homebrew-repo && brew install s2m
 ```
 
 # Showcase
