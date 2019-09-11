@@ -13,6 +13,16 @@ public class Main {
 
   public static void main(String[] args) {
     String exp = Arrays.stream(args).collect(Collectors.joining(" "));
+
+    if (exp.trim().startsWith("show")) {
+      // show case
+      if (exp.endsWith("tables")) {
+        System.out.println("db.getCollectionNames()");
+        return;
+      }
+      return;
+    }
+
     CharStream input = new ANTLRInputStream(exp + "\n");
     SelectLexer lexer = new SelectLexer(input);
     CommonTokenStream stream = new CommonTokenStream(lexer);
